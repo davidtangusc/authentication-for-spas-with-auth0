@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Navigation() {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,9 +25,11 @@ export default function Navigation() {
               </Link>
             </li>
           </ul>
-          <div className="d-flex">
-            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-          </div>
+          {!isLoading && (
+            <div className="d-flex">
+              {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+            </div>
+          )}
         </div>
       </div>
     </nav>

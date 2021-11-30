@@ -1,8 +1,11 @@
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Navigation() {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -23,8 +26,7 @@ export default function Navigation() {
             </li>
           </ul>
           <div className="d-flex">
-            <LoginButton />
-            <LogoutButton />
+            {isAuthenticated ? <LogoutButton /> : <LoginButton />}
           </div>
         </div>
       </div>
